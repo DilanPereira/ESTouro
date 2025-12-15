@@ -9,7 +9,6 @@ import bloon.Bloon;
 import game.manipulator.ManipuladorTorre;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
-import torre.ataque.ModoAtaque;
 import torre.projetil.Projetil;
 
 /**
@@ -20,12 +19,11 @@ public interface Torre extends Cloneable {
 
 	/**
 	 * constantes que definem o modo de ataque das torres
-	 *
+	 */
 	public static final int ATACA_PRIMEIRO = 0;
 	public static final int ATACA_ULTIMO = ATACA_PRIMEIRO + 1;
 	public static final int ATACA_PERTO = ATACA_ULTIMO + 1;
 	public static final int ATACA_JUNTOS = ATACA_PERTO + 1;
-	 */
 
 	/**
 	 * Define a posição no écran da torre
@@ -69,16 +67,14 @@ public interface Torre extends Cloneable {
 	 * 
 	 * @param mode modo de ataque
 	 */
-	//public void setModoAtaque(int mode);
-	public void setModoAtaque(ModoAtaque mode);
+	public void setModoAtaque(int mode);
 
 	/**
 	 * devolve o modo de ataque da torre.
 	 * 
 	 * @return o modo de ataque
 	 */
-	//public int getModoAtaque();
-	public ModoAtaque getModoAtaque();
+	public int getModoAtaque();
 
 	/**
 	 * define qual o raio de accao da torre. O raio de accao
