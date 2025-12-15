@@ -15,6 +15,8 @@ import game.manipulator.ManipuladorVazio;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
 import prof.jogos2D.util.DetectorColisoes;
+import torre.ataque.ModoAtaque;
+import torre.ataque.Ataca_Primeiro;
 
 /**
  * Classe que implementa os comportamentos e variáveis comuns a todos as torres.
@@ -25,7 +27,7 @@ public abstract class TorreDefault implements Torre {
 	private Mundo mundo; // mundo onde está a torre
 	private ComponenteMultiAnimado imagem; // desenho da torre
 
-	private int modoAtaque = ATACA_PRIMEIRO; // modo de ataque da torre
+	private ModoAtaque modoAtaque = new Ataca_Primeiro(); // modo de ataque da torre
 	private int raioAtaque; // raio de ataque, isto é, área circular onde consegue detetar bloons
 	private Point pontoDisparo; // ponto de onde sai o disparo
 
@@ -136,12 +138,12 @@ public abstract class TorreDefault implements Torre {
 	}
 
 	@Override
-	public void setModoAtaque(int modo) {
+	public void setModoAtaque(ModoAtaque modo) {
 		modoAtaque = modo;
 	}
 
 	@Override
-	public int getModoAtaque() {
+	public ModoAtaque getModoAtaque() {
 		return modoAtaque;
 	}
 
