@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import bloon.Bloon;
+import game.manipulator.ManipuladorBalista;
+import game.manipulator.ManipuladorTorre;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
 import torre.projetil.Dardo;
@@ -145,5 +147,10 @@ public class TorreBalista extends TorreDefault {
 		TorreBalista copia = (TorreBalista) super.clone();
 		copia.mira = new Point(mira);
 		return copia;
+	}
+
+	@Override
+	public ManipuladorTorre criarManipulador(){
+		return new ManipuladorBalista(this);
 	}
 }

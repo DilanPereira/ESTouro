@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import bloon.Bloon;
+import game.manipulator.ManipuladorMorteiro;
+import game.manipulator.ManipuladorTorre;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
@@ -126,6 +128,11 @@ public class TorreMorteiro extends TorreDefault {
 		TorreMorteiro copia = (TorreMorteiro) super.clone();
 		copia.areaAlvo = new Point(areaAlvo);
 		return copia;
+	}
+
+	@Override
+	public ManipuladorTorre criarManipulador(){
+		return new ManipuladorMorteiro(this);
 	}
 
 }

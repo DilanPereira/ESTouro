@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import bloon.Bloon;
+import game.manipulator.ManipuladorOcto;
+import game.manipulator.ManipuladorTorre;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
 import torre.projetil.Dardo;
@@ -121,5 +123,10 @@ public class TorreOctogonal extends TorreDefault {
 	public void setAngle(double angle) {
 		getComponente().setAngulo(angle);
 		baseAngle = angle;
+	}
+
+	@Override
+	public ManipuladorTorre criarManipulador(){
+		return new ManipuladorOcto(this);
 	}
 }

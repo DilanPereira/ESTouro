@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 import bloon.Bloon;
+import game.manipulator.ManipuladorTorre;
+import game.manipulator.ManipuladorVazio;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
 import prof.jogos2D.util.DetectorColisoes;
@@ -178,5 +180,10 @@ public abstract class TorreDefault implements Torre {
 		} catch (CloneNotSupportedException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public ManipuladorTorre criarManipulador(){
+		return new ManipuladorVazio(this);
 	}
 }

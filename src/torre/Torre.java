@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.List;
 
 import bloon.Bloon;
+import game.manipulator.ManipuladorTorre;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
 import torre.projetil.Projetil;
@@ -118,4 +119,6 @@ public interface Torre extends Cloneable {
 	 * @return uma torre igual à original
 	 */
 	public Torre clone();
+
+	public ManipuladorTorre criarManipulador();
 }
