@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.util.LinkedHashMap;
 import torre.Torre;
+import torre.ataque.ModoAtaqueCreator;
 
 import javax.swing.border.TitledBorder;
 
@@ -32,15 +33,15 @@ public class ConfiguradorTorres extends JPanel {
 	 * Cria os vários botões para os vários modos de ataque
 	 */
 	private void criarBotoesAtaques(JPanel painelAtaques) {
-		// TODO acrescentar os novos modos de ataque
-		painelAtaques.add(criarBotaoAtaque("Primeiro", Torre.ATACA_PRIMEIRO));
-		painelAtaques.add(criarBotaoAtaque("Último", Torre.ATACA_ULTIMO));
+		// FEITO acrescentar os novos modos de ataque
+		painelAtaques.add(criarBotaoAtaque("Primeiro", ModoAtaqueCreator.ATACA_PRIMEIRO));
+		painelAtaques.add(criarBotaoAtaque("Último", ModoAtaqueCreator.ATACA_ULTIMO));
 
-		painelAtaques.add(criarBotaoAtaque("Perto", Torre.ATACA_PERTO));
-		painelAtaques.add(criarBotaoAtaque("Longe", -1));
+		painelAtaques.add(criarBotaoAtaque("Perto", ModoAtaqueCreator.ATACA_PERTO));
+		painelAtaques.add(criarBotaoAtaque("Longe", ModoAtaqueCreator.ATACA_LONGE));
 
-		painelAtaques.add(criarBotaoAtaque("Forte", -1));
-		painelAtaques.add(criarBotaoAtaque("Juntos", Torre.ATACA_JUNTOS));
+		painelAtaques.add(criarBotaoAtaque("Forte", ModoAtaqueCreator.ATACA_FORTE));
+		painelAtaques.add(criarBotaoAtaque("Juntos", ModoAtaqueCreator.ATACA_JUNTOS));
 	}
 
 	/**

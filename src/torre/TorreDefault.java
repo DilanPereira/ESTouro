@@ -15,8 +15,7 @@ import game.manipulator.ManipuladorVazio;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
 import prof.jogos2D.util.DetectorColisoes;
-import torre.ataque.ModoAtaque;
-import torre.ataque.Ataca_Primeiro;
+import torre.ataque.*;
 
 /**
  * Classe que implementa os comportamentos e variáveis comuns a todos as torres.
@@ -138,8 +137,8 @@ public abstract class TorreDefault implements Torre {
 	}
 
 	@Override
-	public void setModoAtaque(ModoAtaque modo) {
-		modoAtaque = modo;
+	public void setModoAtaque(int modo) {
+		this.modoAtaque = ModoAtaqueCreator.criar(modo);
 	}
 
 	@Override
