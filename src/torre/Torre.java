@@ -2,6 +2,7 @@ package torre;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.io.PrintWriter;
 import java.util.List;
 
 import bloon.Bloon;
@@ -121,4 +122,6 @@ public interface Torre extends Cloneable {
 	public Torre clone();
 
 	public ManipuladorTorre criarManipulador();
+
+	public void gravaTorre(PrintWriter pw);
 }

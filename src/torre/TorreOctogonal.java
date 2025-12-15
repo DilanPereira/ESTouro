@@ -2,6 +2,7 @@ package torre;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -128,5 +129,10 @@ public class TorreOctogonal extends TorreDefault {
 	@Override
 	public ManipuladorTorre criarManipulador(){
 		return new ManipuladorOcto(this);
+	}
+
+	public void gravaTorre(PrintWriter pw){
+		pw.print("octo\t");
+		pw.println(this.getComponente().getAngulo());
 	}
 }

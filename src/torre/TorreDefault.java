@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
@@ -182,8 +183,9 @@ public abstract class TorreDefault implements Torre {
 		}
 	}
 
-	@Override
 	public ManipuladorTorre criarManipulador(){
 		return new ManipuladorVazio(this);
 	}
+
+	public abstract void gravaTorre(PrintWriter pw);
 }

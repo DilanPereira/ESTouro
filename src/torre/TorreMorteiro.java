@@ -2,6 +2,7 @@ package torre;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.PrintWriter;
 import java.util.List;
 
 import bloon.Bloon;
@@ -135,4 +136,9 @@ public class TorreMorteiro extends TorreDefault {
 		return new ManipuladorMorteiro(this);
 	}
 
+	public void gravaTorre(PrintWriter pw){
+		pw.print("morteiro\t");
+		Point ataque = this.getAreaAlvo();
+		pw.println(ataque.x + "\t" + ataque.y);
+	}
 }

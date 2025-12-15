@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.PrintWriter;
 import java.util.List;
 
 import bloon.Bloon;
@@ -152,5 +153,10 @@ public class TorreBalista extends TorreDefault {
 	@Override
 	public ManipuladorTorre criarManipulador(){
 		return new ManipuladorBalista(this);
+	}
+
+	public void gravaTorre(PrintWriter pw){
+		pw.print("balista\t");
+		pw.println(this.getComponente().getAngulo());
 	}
 }

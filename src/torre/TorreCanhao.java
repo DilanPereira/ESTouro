@@ -2,6 +2,7 @@ package torre;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -106,5 +107,9 @@ public class TorreCanhao extends TorreDefault {
 		p[0].setPosicao(shoot);
 		p[0].setAlcance(getRaioAcao() + 20);
 		return p;
+	}
+
+	public void gravaTorre(PrintWriter pw){
+		pw.println("canhao");
 	}
 }
