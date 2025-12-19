@@ -48,7 +48,7 @@ public class TorreOctogonal extends TorreDefault {
 		// FEITO remover este switch e suportar os restantes modos de ataque
 		// ver a posição do centro para o teste de estar perto
 		Point centro = getComponente().getPosicaoCentro();
-		posAlvo = getModoAtaque().ataca(alvosPossiveis, centro).getComponente().getPosicaoCentro();
+		posAlvo = getModoAtaque().ataca(alvosPossiveis, centro);
 
 		if (posAlvo == null)
 			return new Projetil[0];

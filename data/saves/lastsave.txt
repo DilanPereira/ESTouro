@@ -1,6 +1,8 @@
 0
 1
-300
+0
 60
-1
-455	127	sniper
+3
+174	168	macaco
+227	95	macaco
+285	193	macaco
