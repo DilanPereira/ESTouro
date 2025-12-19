@@ -52,8 +52,9 @@ public class Mundo {
 			// o resultado de um ataque pode ser um arrays de projéteis
 			// se assim for temos de os adicionar aos projecteis
 			Projetil ps[] = t.atacar(bloons);
-			for (Projetil p : ps)
-				addProjetil(p);
+			if(ps != null) //No caso de ser um sniper, não tem projétil
+				for (Projetil p : ps)
+					addProjetil(p);
 		}
 
 		// depois de tudo atualizado vamos remover os bloons rebentados

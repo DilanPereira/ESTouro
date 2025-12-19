@@ -45,7 +45,7 @@ public class TorreCanhao extends TorreDefault {
 		// FEITO remover este switch e suportar os restantes modos de ataque
 		// ver a posição do centro para o teste de estar perto
 		Point centro = getComponente().getPosicaoCentro();
-		posAlvo = getModoAtaque().ataca(alvosPossiveis, centro);
+		posAlvo = getModoAtaque().ataca(alvosPossiveis, centro).getComponente().getPosicaoCentro();
 		
 		if (posAlvo == null)
 			return new Projetil[0];

@@ -6,5 +6,5 @@ import java.util.List;
 import bloon.Bloon;
 
 public interface ModoAtaque {
-    public Point ataca(List<Bloon> bloons, Point centroTorre);
+    public Bloon ataca(List<Bloon> bloons, Point centroTorre);
 }

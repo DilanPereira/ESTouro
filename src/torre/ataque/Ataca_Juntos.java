@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 import bloon.Bloon;
 
 public class Ataca_Juntos implements ModoAtaque {
-    public Point ataca(List<Bloon> bloons, Point centroTorre) {
+    public Bloon ataca(List<Bloon> bloons, Point centroTorre) {
         Map<Integer, List<Bloon>> posicoes = bloons.stream().collect(Collectors.groupingBy(b -> b.getPosicaoNoCaminho() / 20));
 		int posicaoComMais = Collections.max(posicoes.keySet(),(k1, k2) -> posicoes.get(k1).size() - posicoes.get(k2).size());
 		Bloon bj = posicoes.get(posicaoComMais).getFirst();
-		return bj.getComponente().getPosicaoCentro();
+		return bj;
     }
 }
