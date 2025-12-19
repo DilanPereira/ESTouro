@@ -62,7 +62,7 @@ public interface Torre extends Cloneable {
 	 * 
 	 * @param mode modo de ataque
 	 */
-	public void setModoAtaque(int mode);
+	public void setModoAtaque(ModoAtaque mode);
 
 	/**
 	 * devolve o modo de ataque da torre.

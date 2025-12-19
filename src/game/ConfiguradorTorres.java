@@ -9,7 +9,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.util.LinkedHashMap;
 import torre.Torre;
-import torre.ataque.ModoAtaqueCreator;
+import torre.ataque.*;
 
 import javax.swing.border.TitledBorder;
 
@@ -27,21 +27,21 @@ public class ConfiguradorTorres extends JPanel {
 	private Torre escolhida;
 
 	/** mapeia os modos de ataque ao respetivo botão */
-	private LinkedHashMap<Integer, JToggleButton> botoes = new LinkedHashMap<>();
+	private LinkedHashMap<ModoAtaque, JToggleButton> botoes = new LinkedHashMap<>();
 
 	/**
 	 * Cria os vários botões para os vários modos de ataque
 	 */
 	private void criarBotoesAtaques(JPanel painelAtaques) {
 		// FEITO acrescentar os novos modos de ataque
-		painelAtaques.add(criarBotaoAtaque("Primeiro", ModoAtaqueCreator.ATACA_PRIMEIRO));
-		painelAtaques.add(criarBotaoAtaque("Último", ModoAtaqueCreator.ATACA_ULTIMO));
+		painelAtaques.add(criarBotaoAtaque("Primeiro", new Ataca_Primeiro()));
+		painelAtaques.add(criarBotaoAtaque("Último", new Ataca_Ultimo()));
 
-		painelAtaques.add(criarBotaoAtaque("Perto", ModoAtaqueCreator.ATACA_PERTO));
-		painelAtaques.add(criarBotaoAtaque("Longe", ModoAtaqueCreator.ATACA_LONGE));
+		painelAtaques.add(criarBotaoAtaque("Perto", new Ataca_Perto()));
+		painelAtaques.add(criarBotaoAtaque("Longe", new Ataca_Longe()));
 
-		painelAtaques.add(criarBotaoAtaque("Forte", ModoAtaqueCreator.ATACA_FORTE));
-		painelAtaques.add(criarBotaoAtaque("Juntos", ModoAtaqueCreator.ATACA_JUNTOS));
+		painelAtaques.add(criarBotaoAtaque("Forte", new Ataca_Forte()));
+		painelAtaques.add(criarBotaoAtaque("Juntos", new Ataca_Juntos()));
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class ConfiguradorTorres extends JPanel {
 	 * @param modoAtaque o modo de ataque
 	 * @return o botão criado
 	 */
-	private JToggleButton criarBotaoAtaque(String texto, int modoAtaque) {
+	private JToggleButton criarBotaoAtaque(String texto, ModoAtaque modoAtaque) {
 		JToggleButton button = new JToggleButton(texto);
 		button.setPreferredSize(new Dimension(60, 18));
 		button.setMargin(new Insets(0, 0, 0, 0));

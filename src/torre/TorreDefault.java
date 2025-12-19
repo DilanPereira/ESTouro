@@ -137,8 +137,8 @@ public abstract class TorreDefault implements Torre {
 	}
 
 	@Override
-	public void setModoAtaque(int modo) {
-		this.modoAtaque = ModoAtaqueCreator.criar(modo);
+	public void setModoAtaque(ModoAtaque modo){
+		this.modoAtaque = modo;
 	}
 
 	@Override
