@@ -166,4 +166,6 @@ public interface Bloon {
 	 * @param bo o observador a remover
 	 */
 	public void removeBloonObserver(BloonObserver bo);
+
+	public Bloon clone();
 }

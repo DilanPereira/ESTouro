@@ -221,4 +221,10 @@ public class BloonSimples implements Bloon {
 		for (int i = obs.size() - 1; i >= 0; i--)
 			obs.get(i).bloonEscapou(this);
 	}
+
+	@Override
+	public Bloon clone() {
+		BloonSimples clonado = new BloonSimples(imagem, imagemPop, velocidade, resistencia, valor);
+		return clonado;
+	}
 }
