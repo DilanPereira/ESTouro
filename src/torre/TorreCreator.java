@@ -20,7 +20,7 @@ public class TorreCreator {
 	 * @return a torre criada, ou null se não existir torre com o nome dado
 	 */
 	public Torre criarTorrePorNome(String nome) {
-		// TODO suportar também a Sniper
+		// FEITO suportar também a Sniper
 		switch (nome) {
 			case "octo":
 				return criarOctogonal();
