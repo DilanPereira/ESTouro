@@ -28,59 +28,31 @@ public class TorreMacaco extends TorreDefault {
 		super(new ComponenteMultiAnimado(new Point(50, 50), img, 2, 4, 3), 30, 8, new Point(15, 15), 100);
 	}
 
-	@Override
-	public Projetil[] atacar(List<Bloon> bloons) {
-		atualizarCicloDisparo();
-
-		// vamos buscar o desenho pois vai ser preciso várias vezes
-		ComponenteMultiAnimado anim = getComponente();
-
-		// já acabou a animação de disparar? volta à animação de pausa
-		if (anim.getAnim() == ATAQUE_ANIM && anim.numCiclosFeitos() >= 1) {
-			anim.setAnim(PAUSA_ANIM);
-		}
-
-		// determinar a posição do bloon alvo, consoante o método de ataque
-		Point posAlvo = null;
+	//Metodos para o Ataque:
+	protected Point determinaAlvo(List<Bloon> bloons){
 		// ver quais os bloons que estão ao alcance
 		List<Bloon> alvosPossiveis = getBloonsInRadius(bloons, getComponente().getPosicaoCentro(), getRaioAcao());
 		if (alvosPossiveis.size() == 0)
-			return new Projetil[0];
+			return null;
 		// FEITO remover este switch e suportar os restantes modos de ataque
 		// ver a posição do centro para o teste de estar perto
 		Point centro = getComponente().getPosicaoCentro();
-		posAlvo = getModoAtaque().ataca(alvosPossiveis, centro);
-		
-		if (posAlvo == null)
-			return new Projetil[0];
+		return getModoAtaque().ataca(alvosPossiveis, centro);
+	}
+
+	protected double determinarAngulo(List<Bloon> bloons, ComponenteMultiAnimado anim){
+		Point posAlvo = determinaAlvo(bloons);
+		//Não precisa de verificação, porque está feita na superclasse
 
 		// ver o ângulo que o alvo faz com a torre, para assim rodar esta
 		double angle1 = DetectorColisoes.getAngulo(posAlvo, anim.getPosicaoCentro());
 		anim.setAngulo(angle1);
 
 		// ajustar o ângulo
-		double angle = angle1;
+		return angle1;
+	}
 
-		// se vai disparar daqui a pouco, começamos já com a animação de ataque
-		// para sincronizar a frame de disparo com o disparo real
-		sincronizarFrameDisparo(anim);
-
-		// se ainda não está na altura de disparar, não dispara
-		if (!podeDisparar())
-			return new Projetil[0];
-
-		// disparar
-		resetTempoDisparar();
-
-		// primeiro calcular o ponto de disparo
-		Point disparo = getPontoDisparo();
-		double cosA = Math.cos(angle);
-		double senA = Math.sin(angle);
-		int px = (int) (disparo.x * cosA - disparo.y * senA);
-		int py = (int) (disparo.y * cosA + disparo.x * senA); // repor o tempo de disparo
-		Point shoot = new Point(centro.x + px, centro.y + py);
-
-		// depois criar os projéteis
+	protected Projetil[] criarProjetil(Double angle, Point shoot){
 		Projetil p[] = new Projetil[1];
 		ComponenteVisual img = new ComponenteAnimado(new Point(),
 				(BufferedImage) ImageLoader.getLoader().getImage("data/torres/dardo.gif"), 2, 2);
@@ -90,7 +62,10 @@ public class TorreMacaco extends TorreDefault {
 		return p;
 	}
 
+
+	@Override
 	public void gravaTorre(PrintWriter pw){
 		pw.println("macaco");
 	}
+
 }

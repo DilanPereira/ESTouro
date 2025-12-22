@@ -92,49 +92,18 @@ public class TorreBalista extends TorreDefault {
 		g.setComposite(oldComp);
 	}
 
-	@Override
-	public Projetil[] atacar(List<Bloon> bloons) {
-		atualizarCicloDisparo();
-
-		// vamos buscar o desenho pois vai ser preciso várias vezes
-		ComponenteMultiAnimado anim = getComponente();
-
-		// já acabou a animação de disparar? volta à animação de pausa
-		if (anim.getAnim() == ATAQUE_ANIM && anim.numCiclosFeitos() >= 1) {
-			anim.setAnim(PAUSA_ANIM);
-		}
-
-		// determinar a posição do bloon alvo, consoante o método de ataque
+	//Metodos de Ataque:
+	protected Point determinaAlvo(List<Bloon> bloons){
 		List<Bloon> alvosPossiveis = getBloonsInLine(bloons, getComponente().getPosicaoCentro(), getMira());
-		Point posAlvo = (alvosPossiveis.size() == 0) ? null : mira;
+		return (alvosPossiveis.size() == 0) ? null : mira;
+	}
 
-		if (posAlvo == null)
-			return new Projetil[0];
-
+	protected double determinarAngulo(List<Bloon> bloons, ComponenteMultiAnimado anim){
 		// ver o ângulo que o alvo faz com a torre, para assim rodar esta
-		double angle = anim.getAngulo();
+		return anim.getAngulo();
+	}
 
-		// se vai disparar daqui a pouco, começamos já com a animação de ataque
-		// para sincronizar a frame de disparo com o disparo real
-		sincronizarFrameDisparo(anim);
-
-		// se ainda não está na altura de disparar, não dispara
-		if (!podeDisparar())
-			return new Projetil[0];
-
-		// disparar
-		resetTempoDisparar();
-
-		// primeiro calcular o ponto de disparo
-		Point centro = getComponente().getPosicaoCentro();
-		Point disparo = getPontoDisparo();
-		double cosA = Math.cos(angle);
-		double senA = Math.sin(angle);
-		int px = (int) (disparo.x * cosA - disparo.y * senA);
-		int py = (int) (disparo.y * cosA + disparo.x * senA); // repor o tempo de disparo
-		Point shoot = new Point(centro.x + px, centro.y + py);
-
-		// depois criar os projéteis
+	protected Projetil[] criarProjetil(Double angle, Point shoot){
 		Projetil p[] = new Projetil[1];
 		ComponenteVisual img = new ComponenteSimples(ImageLoader.getLoader().getImage("data/torres/seta.gif"));
 		p[0] = new Dardo(img, angle, 10, 20);

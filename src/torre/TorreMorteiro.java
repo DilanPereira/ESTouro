@@ -72,46 +72,23 @@ public class TorreMorteiro extends TorreDefault {
 	}
 
 	@Override
-	public Projetil[] atacar(List<Bloon> bloons) {
-		atualizarCicloDisparo();
+	public Torre clone() {
+		TorreMorteiro copia = (TorreMorteiro) super.clone();
+		copia.areaAlvo = new Point(areaAlvo);
+		return copia;
+	}
 
-		// vamos buscar o desenho pois vai ser preciso várias vezes
-		ComponenteMultiAnimado anim = getComponente();
+	//Metodos para o Ataque:
+	protected Point determinaAlvo(List<Bloon> bloons){
+		return areaAlvo;
+	}
 
-		// já acabou a animação de disparar? volta à animação de pausa
-		if (anim.getAnim() == ATAQUE_ANIM && anim.numCiclosFeitos() >= 1) {
-			anim.setAnim(PAUSA_ANIM);
-		}
+	protected double determinarAngulo(List<Bloon> bloons, ComponenteMultiAnimado anim){
+		Point posAlvo = determinaAlvo(bloons);
+		return DetectorColisoes.getAngulo(posAlvo, getComponente().getPosicaoCentro());
+	}
 
-		// determinar a posição do bloon alvo, consoante o método de ataque
-		Point posAlvo = areaAlvo;
-		if (posAlvo == null)
-			return new Projetil[0];
-
-		// ver o ângulo que o alvo faz com a torre, para assim rodar esta
-		double angle = DetectorColisoes.getAngulo(posAlvo, getComponente().getPosicaoCentro());
-
-		// se vai disparar daqui a pouco, começamos já com a animação de ataque
-		// para sincronizar a frame de disparo com o disparo real
-		sincronizarFrameDisparo(anim);
-
-		// se ainda não está na altura de disparar, não dispara
-		if (!podeDisparar())
-			return new Projetil[0];
-
-		// disparar
-		resetTempoDisparar();
-		Point centro = getComponente().getPosicaoCentro();
-		Point disparo = getPontoDisparo();
-		double cosA = Math.cos(angle);
-		double senA = Math.sin(angle);
-		int px = (int) (disparo.x * cosA - disparo.y * senA);
-		int py = (int) (disparo.y * cosA + disparo.x * senA);
-
-		// primeiro calcular o ponto de disparo
-		Point shoot = new Point(centro.x + px, centro.y + py);
-
-		// depois criar os projéteis
+	protected Projetil[] criarProjetil(Double angle, Point shoot){
 		Projetil p[] = new Projetil[1];
 		// reajustar o ângulo para ser desde o ponto de disparo até ao ponto de destino
 		angle = DetectorColisoes.getAngulo(areaAlvo, shoot);
@@ -124,18 +101,13 @@ public class TorreMorteiro extends TorreDefault {
 		return p;
 	}
 
-	@Override
-	public Torre clone() {
-		TorreMorteiro copia = (TorreMorteiro) super.clone();
-		copia.areaAlvo = new Point(areaAlvo);
-		return copia;
-	}
 
 	@Override
 	public ManipuladorTorre criarManipulador(){
 		return new ManipuladorMorteiro(this);
 	}
 
+	@Override
 	public void gravaTorre(PrintWriter pw){
 		pw.print("morteiro\t");
 		Point ataque = this.getAreaAlvo();

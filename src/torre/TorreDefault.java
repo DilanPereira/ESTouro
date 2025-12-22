@@ -14,8 +14,13 @@ import game.manipulator.ManipuladorTorre;
 import game.manipulator.ManipuladorVazio;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
+import prof.jogos2D.image.ComponenteSimples;
+import prof.jogos2D.image.ComponenteVisual;
 import prof.jogos2D.util.DetectorColisoes;
+import prof.jogos2D.util.ImageLoader;
 import torre.ataque.*;
+import torre.projetil.BombaImpacto;
+import torre.projetil.Projetil;
 
 /**
  * Classe que implementa os comportamentos e variáveis comuns a todos as torres.
@@ -183,6 +188,56 @@ public abstract class TorreDefault implements Torre {
 			return null;
 		}
 	}
+
+	public Projetil[] atacar(List<Bloon> bloons) {
+		atualizarCicloDisparo();
+
+		// vamos buscar o desenho pois vai ser preciso várias vezes
+		ComponenteMultiAnimado anim = getComponente();
+
+		// já acabou a animação de disparar? volta à animação de pausa
+		if (anim.getAnim() == ATAQUE_ANIM && anim.numCiclosFeitos() >= 1) {
+			anim.setAnim(PAUSA_ANIM);
+		}
+
+		if(determinaAlvo(bloons) == null)
+			return new Projetil[0];
+
+        double angle = determinarAngulo(bloons, anim);
+		
+		// se vai disparar daqui a pouco, começamos já com a animação de ataque
+		// para sincronizar a frame de disparo com o disparo real
+		sincronizarFrameDisparo(anim);
+
+		// se ainda não está na altura de disparar, não dispara
+		if (!podeDisparar())
+			return new Projetil[0];
+
+		// disparar
+		resetTempoDisparar();
+
+		// primeiro calcular o ponto de disparo
+		Point centro = getComponente().getPosicaoCentro();
+		Point disparo = getPontoDisparo();
+		double cosA = Math.cos(angle);
+		double senA = Math.sin(angle);
+		int px = (int) (disparo.x * cosA - disparo.y * senA);
+		int py = (int) (disparo.y * cosA + disparo.x * senA); // repor o tempo de disparo
+		Point shoot = new Point(centro.x + px, centro.y + py);
+
+		// depois criar os projéteis
+		Projetil p[] = new Projetil[1];
+		ComponenteVisual img = new ComponenteSimples(ImageLoader.getLoader().getImage("data/torres/bomba.gif"));
+		p[0] = new BombaImpacto(img, angle, 12, 2, getMundo());
+		p[0].setPosicao(shoot);
+		p[0].setAlcance(getRaioAcao() + 20);
+
+		return criarProjetil(angle, shoot);
+	}
+
+	protected abstract Point determinaAlvo(List<Bloon> bloons);
+    protected abstract double determinarAngulo(List<Bloon> bloons, ComponenteMultiAnimado anim);
+	protected abstract Projetil[] criarProjetil(Double angle, Point shoot);
 
 	public ManipuladorTorre criarManipulador(){
 		return new ManipuladorVazio(this);
