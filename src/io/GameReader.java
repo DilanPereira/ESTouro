@@ -46,6 +46,7 @@ public class GameReader {
 				switch (info[2]) {
 					case "octo":
 					case "balista":
+					case "sniper":
 						double angulo = Double.parseDouble(info[3]);
 						torres[i].getComponente().setAngulo(angulo);
 						break;

@@ -14,12 +14,8 @@ import game.manipulator.ManipuladorTorre;
 import game.manipulator.ManipuladorVazio;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
-import prof.jogos2D.image.ComponenteSimples;
-import prof.jogos2D.image.ComponenteVisual;
 import prof.jogos2D.util.DetectorColisoes;
-import prof.jogos2D.util.ImageLoader;
 import torre.ataque.*;
-import torre.projetil.BombaImpacto;
 import torre.projetil.Projetil;
 
 /**
@@ -224,13 +220,6 @@ public abstract class TorreDefault implements Torre {
 		int px = (int) (disparo.x * cosA - disparo.y * senA);
 		int py = (int) (disparo.y * cosA + disparo.x * senA); // repor o tempo de disparo
 		Point shoot = new Point(centro.x + px, centro.y + py);
-
-		// depois criar os projéteis
-		Projetil p[] = new Projetil[1];
-		ComponenteVisual img = new ComponenteSimples(ImageLoader.getLoader().getImage("data/torres/bomba.gif"));
-		p[0] = new BombaImpacto(img, angle, 12, 2, getMundo());
-		p[0].setPosicao(shoot);
-		p[0].setAlcance(getRaioAcao() + 20);
 
 		return criarProjetil(angle, shoot);
 	}
