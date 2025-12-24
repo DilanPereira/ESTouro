@@ -3,9 +3,10 @@ package bloon;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import bloon.CaracteristicasExtras.Armadura;
 import bloon.CaracteristicasExtras.ImuneExplosao;
 import bloon.CaracteristicasExtras.ImunePerfurante;
+import bloon.CaracteristicasExtras.Protecao.BloonComArmadura;
+import bloon.CaracteristicasExtras.Protecao.BloonComEscudo;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
 
@@ -237,10 +238,10 @@ public class BloonCreator {
 
 		// FEITO o verde e o amarelo têm de ter uma armadura que rebenta ao fim de 8 contactos
 		Bloon verde = criarVerde();
-		Armadura verdeComArmadura = new Armadura(verde, DURABILIDADE_ARMADURA, armaduraImg);
+		BloonComArmadura verdeComArmadura = new BloonComArmadura(verde, armaduraImg, DURABILIDADE_ARMADURA);
 		metalZep.addBloonProvavel(verdeComArmadura);
 		Bloon amarelo = criarAmarelo();
-		Armadura amareloComArmadura = new Armadura(amarelo, DURABILIDADE_ARMADURA, armaduraImg);
+		BloonComArmadura amareloComArmadura = new BloonComArmadura(amarelo, armaduraImg, DURABILIDADE_ARMADURA);
 		metalZep.addBloonProvavel(amareloComArmadura);
 
 		// FEITO o Zeppelin metal tem de ser imune a perfurantes
@@ -253,19 +254,17 @@ public class BloonCreator {
 		ComponenteVisual imagemPop = getImagemPopZep();
 		ComponenteVisual escudoImg = getImagemEscudo();
 
-		final int DURABILIDADE_ARMADURA = 12;
-
+		final int DURABILIDADE_ESCUDO = 12;
 		
 		BloonFabricante pretoZep = new BloonFabricante(imagem, imagemPop, 2.7f, 30, 45, 30);
 
 		// FEITO o amarelo e o rosa devem ter um escudo que parte ao fim de 12 contactos
 		Bloon amarelo = criarAmarelo();
-		// TODO: perguntao se Escudo == Armadura (apenas icon diferente)
-		Armadura amareloComArmadura = new Armadura(amarelo, DURABILIDADE_ARMADURA, escudoImg);
-		pretoZep.addBloonProvavel(amareloComArmadura);
+		BloonComEscudo amareloComEscudo = new BloonComEscudo(amarelo, escudoImg, DURABILIDADE_ESCUDO);
+		pretoZep.addBloonProvavel(amareloComEscudo);
 		Bloon rosa = criarRosa();
-		Armadura rosaComArmadura = new Armadura(rosa, DURABILIDADE_ARMADURA, escudoImg);
-		pretoZep.addBloonProvavel(rosaComArmadura);
+		BloonComEscudo rosaComEscudo = new BloonComEscudo(rosa, escudoImg, DURABILIDADE_ESCUDO);
+		pretoZep.addBloonProvavel(rosaComEscudo);
 
 		// FEITO o Zeppelin preto tem de ser imune a explosões
 		ImuneExplosao pretoZepImuneExplosao = new ImuneExplosao(pretoZep);
