@@ -57,14 +57,16 @@ public class BloonFabricante extends BloonSimples {
             int pos = getPosicaoNoCaminho();
             if (getCaminho().getPoint(pos + pathOffset) == null)
                 pathOffset = 0;
-            // FEITO? (fiz o clone) esta parte tem de ser revista pois está a usar repetidamente os mesmos bloons
-            // TODO: rever
-            Bloon escolhido = provaveis.get(idx).clone();
+            // TODO esta parte tem de ser revista pois está a usar repetidamente os mesmos bloons
+            Bloon escolhido = provaveis.get(idx);
+            //Bloon copia = escolhido.clone();
             escolhido.setCaminho(getCaminho());
             getMundo().addBloonPendente(escolhido);
             escolhido.setPosicaoNoCaminho(pos + pathOffset);
             getObservers().forEach(o -> escolhido.addBloonObserver(o));
             proximaCriacao = ritmoCriacao;
+            System.out.println(escolhido);
+            //System.out.println(copia);
         }
     }
 }

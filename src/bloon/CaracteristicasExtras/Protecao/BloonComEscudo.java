@@ -12,12 +12,24 @@ public class BloonComEscudo extends BloonCaracteristicasExtras implements Protec
 
     private Protecao estadoArmadura;
 
+    private ComponenteVisual img;
+    private int durabilidade;
+
     public BloonComEscudo(Bloon bloon, ComponenteVisual img, int durabilidade){
         super(bloon);
-        this.comEscudo = new ComEscudo(this, bloon, img, durabilidade);
+        this.img = img;
+        this.durabilidade = durabilidade;
+        this.comEscudo = new ComEscudo(this, bloon);
         this.semProtecao = new SemProtecao(bloon);
 
         this.estadoArmadura = this.comEscudo;
+    }
+
+    public ComponenteVisual getImagem(){
+        return img;
+    }
+    public int getDurabilidade(){
+        return durabilidade;
     }
 
     public void tiraArmadura(){
@@ -44,6 +56,9 @@ public class BloonComEscudo extends BloonCaracteristicasExtras implements Protec
         estadoArmadura.desenhar(g);
     }
 
-    
+    @Override
+    public Bloon clone() {
+        return new BloonComEscudo(getBloon().clone(), this.img, this.durabilidade);
+    }
 
 }

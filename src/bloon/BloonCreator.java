@@ -26,7 +26,7 @@ public class BloonCreator {
 	public Bloon criarBloon(String nome) {
 		switch (nome) {
 			case "vermelho":
-				return criarVermelho();
+				return criarZeppelinMetal();
 			case "azul":
 				return criarAzul();
 			case "verde":

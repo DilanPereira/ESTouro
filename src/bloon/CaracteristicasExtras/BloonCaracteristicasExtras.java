@@ -10,11 +10,12 @@ import mundo.Caminho;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteVisual;
 
-public class BloonCaracteristicasExtras implements Bloon{
+public abstract class BloonCaracteristicasExtras implements Bloon{
 
     private final Bloon bloon;
 
     public void desenhar(Graphics2D g) {
+        bloon.setPosicaoNoCaminho(getPosicaoNoCaminho());
         bloon.desenhar(g);
     }
 
@@ -106,9 +107,6 @@ public class BloonCaracteristicasExtras implements Bloon{
         return bloon;
     }
 
-    public Bloon clone() {
-        return bloon.clone();
-    }
-
+    public abstract Bloon clone();
 
 }

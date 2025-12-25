@@ -9,22 +9,20 @@ import prof.jogos2D.image.ComponenteVisual;
 
 public class ComArmadura extends BloonCaracteristicasExtras implements Protecao{
 
-    private BloonComArmadura BloonComArmadura;
-    private int durabilidade;
-    private ComponenteVisual imgProtecao;
+    private final BloonComArmadura bloonControlador;
+    private int durabilidadeAtual;
 
-    protected ComArmadura(BloonComArmadura BloonComArmadura, Bloon bloon, ComponenteVisual imgProtecao, int durabilidade){
+    protected ComArmadura(BloonComArmadura BloonComArmadura, Bloon bloon){
         super(bloon);
-        this.BloonComArmadura = BloonComArmadura;
-        this.imgProtecao = imgProtecao;
-        this.durabilidade = durabilidade;
+        this.bloonControlador = BloonComArmadura;
+        this.durabilidadeAtual = BloonComArmadura.getDurabilidade();
     }
 
     @Override
     public int pop(int estrago) {
-        durabilidade --;
+        durabilidadeAtual --;
         if(!temProtecao()){
-            BloonComArmadura.tiraArmadura();
+            bloonControlador.tiraArmadura();
             return super.pop(estrago);
         }
         return 0;
@@ -37,7 +35,7 @@ public class ComArmadura extends BloonCaracteristicasExtras implements Protecao{
 
     @Override
     public boolean temProtecao() {
-        return durabilidade > 0;
+        return durabilidadeAtual > 0;
     }
 
     @Override
@@ -45,8 +43,13 @@ public class ComArmadura extends BloonCaracteristicasExtras implements Protecao{
         super.desenhar(g);
         int pos = super.getPosicaoNoCaminho();
         Point p = super.getCaminho().getPoint(pos);
-        imgProtecao.setPosicao(p);
-        imgProtecao.desenhar(g);
+        ComponenteVisual img = bloonControlador.getImagem();
+        img.setPosicao(p);
+        img.desenhar(g);
     }
     
+    @Override
+    public Bloon clone() {
+        return new ComArmadura(this.bloonControlador, getBloon().clone());
+    }
 }

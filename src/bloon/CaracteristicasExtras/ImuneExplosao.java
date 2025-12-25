@@ -12,4 +12,9 @@ public class ImuneExplosao extends BloonCaracteristicasExtras {
     public void explode(int estrago) {
         // Se é imune, não faz nada
     }
+
+    @Override
+    public Bloon clone() {
+        return new ImuneExplosao(this);
+    }
 }

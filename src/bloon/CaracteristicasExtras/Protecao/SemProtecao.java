@@ -14,4 +14,9 @@ public class SemProtecao extends BloonCaracteristicasExtras implements Protecao{
         return false;
     }
 
+    @Override
+    public Bloon clone() {
+        return new SemProtecao(getBloon().clone());
+    }
+
 }

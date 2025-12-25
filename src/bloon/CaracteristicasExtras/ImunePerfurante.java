@@ -14,4 +14,9 @@ public class ImunePerfurante extends BloonCaracteristicasExtras {
         return 0;
     }
 
+    @Override
+    public Bloon clone() {
+        return new ImunePerfurante(this);
+    }
+
 }

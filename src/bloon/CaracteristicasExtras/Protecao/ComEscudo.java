@@ -9,15 +9,13 @@ import prof.jogos2D.image.ComponenteVisual;
 
 public class ComEscudo extends BloonCaracteristicasExtras implements Protecao{
     
-    private int durabilidade;
-    private ComponenteVisual imgProtecao;
-    private BloonComEscudo BloonComEscudo;
+    private final BloonComEscudo bloonControlador;
+    private int durabilidadeAtual;
 
-    protected ComEscudo(BloonComEscudo BloonComEscudo, Bloon bloon, ComponenteVisual imgProtecao, int durabilidade){
+    protected ComEscudo(BloonComEscudo BloonComEscudo, Bloon bloon){
         super(bloon);
-        this.BloonComEscudo = BloonComEscudo;
-        this.imgProtecao = imgProtecao;
-        this.durabilidade = durabilidade;
+        this.bloonControlador = BloonComEscudo;
+        this.durabilidadeAtual = BloonComEscudo.getDurabilidade();
     }
 
     @Override
@@ -27,23 +25,29 @@ public class ComEscudo extends BloonCaracteristicasExtras implements Protecao{
 
     @Override
     public void explode(int estrago) {
-        durabilidade --;
+        durabilidadeAtual --;
         if(!temProtecao()){
-            BloonComEscudo.tiraArmadura();
+            bloonControlador.tiraArmadura();
             super.explode(estrago);
         }
     }
 
     @Override
     public boolean temProtecao() {
-        return durabilidade > 0;
+        return durabilidadeAtual > 0;
     }
 
     public void desenhar(Graphics2D g) {
         super.desenhar(g);
         int pos = super.getPosicaoNoCaminho();
         Point p = super.getCaminho().getPoint(pos);
-        imgProtecao.setPosicao(p);
-        imgProtecao.desenhar(g);
+        ComponenteVisual img = bloonControlador.getImagem();
+        img.setPosicao(p);
+        img.desenhar(g);
+    }
+
+    @Override
+    public Bloon clone() {
+        return new ComEscudo(this.bloonControlador, getBloon().clone());
     }
 }
