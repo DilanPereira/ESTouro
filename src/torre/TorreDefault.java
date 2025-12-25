@@ -139,7 +139,8 @@ public abstract class TorreDefault implements Torre {
 
 	@Override
 	public void setModoAtaque(ModoAtaque modo){
-		this.modoAtaque = modo;
+		if(temModosAtaque())
+			this.modoAtaque = modo;
 	}
 
 	@Override
@@ -233,4 +234,5 @@ public abstract class TorreDefault implements Torre {
 	}
 
 	public abstract void gravaTorre(PrintWriter pw);
+	public abstract boolean temModosAtaque();
 }

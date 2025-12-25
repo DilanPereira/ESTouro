@@ -113,4 +113,9 @@ public class TorreMorteiro extends TorreDefault {
 		Point ataque = this.getAreaAlvo();
 		pw.println(ataque.x + "\t" + ataque.y);
 	}
+
+	@Override
+	public boolean temModosAtaque() {
+		return false;
+	}
 }

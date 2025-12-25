@@ -29,6 +29,8 @@ public class ConfiguradorTorres extends JPanel {
 	/** mapeia os modos de ataque ao respetivo botão */
 	private LinkedHashMap<ModoAtaque, JToggleButton> botoes = new LinkedHashMap<>();
 
+	private JPanel painelAtaques;
+
 	/**
 	 * Cria os vários botões para os vários modos de ataque
 	 */
@@ -52,6 +54,16 @@ public class ConfiguradorTorres extends JPanel {
 	 */
 	public void setSelecionada(Torre t) {
 		escolhida = t;
+
+		Boolean temModosAtaques = t.temModosAtaque();
+
+		this.painelAtaques.setVisible(temModosAtaques);
+		
+		this.revalidate();
+		this.repaint();
+
+		if(!temModosAtaques)
+			return;
 
 		JToggleButton bt = botoes.get(t.getModoAtaque());
 		if (bt != null)
@@ -89,12 +101,12 @@ public class ConfiguradorTorres extends JPanel {
 	 * Prepara a zona de interface
 	 */
 	private void setupInterface() {
-		JPanel painelAtaques = new JPanel();
-		painelAtaques.setBorder(new TitledBorder("Modo de Ataque"));
-		painelAtaques.setBounds(new Rectangle(2, 5, 145, 90));
-		criarBotoesAtaques(painelAtaques);
+		this.painelAtaques = new JPanel();
+		this.painelAtaques.setBorder(new TitledBorder("Modo de Ataque"));
+		this.painelAtaques.setBounds(new Rectangle(2, 5, 145, 90));
+		criarBotoesAtaques(this.painelAtaques);
 		this.setLayout(null);
 		this.setBounds(new Rectangle(0, 0, 140, 200));
-		this.add(painelAtaques);
+		this.add(this.painelAtaques);
 	}
 }

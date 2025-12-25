@@ -80,4 +80,9 @@ public class TorreOctogonal extends TorreDefault {
 		pw.print("octo\t");
 		pw.println(this.getComponente().getAngulo());
 	}
+
+	@Override
+	public boolean temModosAtaque() {
+		return false;
+	}
 }

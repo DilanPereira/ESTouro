@@ -62,4 +62,9 @@ public class TorreCanhao extends TorreDefault {
 	public void gravaTorre(PrintWriter pw){
 		pw.println("canhao");
 	}
+
+	@Override
+	public boolean temModosAtaque() {
+		return true;
+	}
 }

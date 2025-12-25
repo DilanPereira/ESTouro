@@ -84,4 +84,9 @@ public class TorreNinja extends TorreDefault {
     public void gravaTorre(PrintWriter pw){
         pw.println("ninja");
     }
+
+    @Override
+    public boolean temModosAtaque() {
+        return true;
+    }
 }

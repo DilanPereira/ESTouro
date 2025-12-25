@@ -132,4 +132,8 @@ public class TorreSniper extends TorreDefault {
 		pw.println(this.getComponente().getAngulo());
 	}
 
+	@Override
+	public boolean temModosAtaque() {
+		return false;
+	}
 }

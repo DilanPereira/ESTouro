@@ -68,4 +68,9 @@ public class TorreMacaco extends TorreDefault {
 		pw.println("macaco");
 	}
 
+	@Override
+	public boolean temModosAtaque() {
+		return true;
+	}
+
 }

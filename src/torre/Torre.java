@@ -120,4 +120,6 @@ public interface Torre extends Cloneable {
 	public ManipuladorTorre criarManipulador();
 
 	public void gravaTorre(PrintWriter pw);
+
+	public boolean temModosAtaque();
 }

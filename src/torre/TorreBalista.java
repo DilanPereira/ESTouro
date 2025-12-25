@@ -128,4 +128,9 @@ public class TorreBalista extends TorreDefault {
 		pw.print("balista\t");
 		pw.println(this.getComponente().getAngulo());
 	}
+
+	@Override
+	public boolean temModosAtaque() {
+		return false;
+	}
 }
