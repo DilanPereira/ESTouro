@@ -134,6 +134,6 @@ public class TorreSniper extends TorreDefault {
 
 	@Override
 	public boolean temModosAtaque() {
-		return false;
+		return true;
 	}
 }
